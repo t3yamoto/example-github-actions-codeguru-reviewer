@@ -45,3 +45,6 @@ jobs:
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: codeguru-results.sarif.json
+
+    - name: cat sarif
+      run: cat codeguru-results.sarif.json | jq .
