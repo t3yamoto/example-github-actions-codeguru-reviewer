@@ -4,19 +4,13 @@ on:
   pull_request:
   workflow_dispatch:
 
-env:
-  BUCKET_NAME : ${{secrets.BUCKET_NAME}}
-  AWS_REGION : ${{secrets.AWS_REGION}}
-
-# permission can be added at job level or workflow level
-permissions:
-  security-events: write
-  id-token: write
-  contents: read    # This is required for actions/checkout
-
 jobs:
   review:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      id-token: write
+      contents: read    # This is required for actions/checkout
     steps:
 
     # Step 1: Checkout the repository and provide your AWS credentials
@@ -36,8 +30,8 @@ jobs:
     - name: CodeGuru Reviewer
       uses: aws-actions/codeguru-reviewer@v1.1
       with:
-        build_path: app # build artifact(s) directory
-        s3_bucket: ${{env.BUCKET_NAME}}  # S3 Bucket with "codeguru-reviewer-*" prefix
+        build_path: . # build artifact(s) directory
+        s3_bucket: ${{secrets.BUCKET_NAME}}  # S3 Bucket with "codeguru-reviewer-*" prefix
     
     # Step 3: Upload results into GitHub
     - name: Upload review result
