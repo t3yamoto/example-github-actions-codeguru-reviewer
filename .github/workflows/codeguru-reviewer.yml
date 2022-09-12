@@ -24,7 +24,7 @@ jobs:
       with:
         role-to-assume: ${{secrets.ROLE_ARN}}
         role-session-name: codeguru-reviewr-session
-        aws-region: ${{env.AWS_REGION}}
+        aws-region: ${{secrets.AWS_REGION}}
 
     # Step 2: Add CodeGuru Reviewer Action
     - name: CodeGuru Reviewer
