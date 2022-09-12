@@ -21,7 +21,7 @@ Resources:
   CodeGuruReviewerBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: !Sub codeguru-reviewer-${RepositoryName}-${AWS::AccountId}
+      BucketName: !Sub codeguru-reviewer-${AWS::AccountId}
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
